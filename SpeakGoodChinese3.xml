@@ -381,7 +381,7 @@ http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 			var voices = window.speechSynthesis.getVoices();
 			if (! voices) voices = window.speechSynthesis.getVoices();
 			for (x = 0; x < voices.length; ++x) {
-				if (voices[x].lang == "zh-CN") { 
+				if (voices[x].lang.toLowerCase().replace("_","-").indexOf("zh") == 0) {
 					voiceZH_CN = x;
 					selectedVoice = voices[x];
 				};
@@ -570,6 +570,7 @@ http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 				meSpeakExample (pinyin); 
 			};
 		    msg.voice = voice;
+		    if (voice && voice.lang) msg.lang = voice.lang;
 		    msg.rate = 0.7;
 		    msg.text = text;
 			speechSynthesis.speak(msg);
